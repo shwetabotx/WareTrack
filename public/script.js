@@ -35,3 +35,20 @@ list.appendChild(li)
 }
 
 loadProducts()
+
+async function receiveStock(){
+
+const productId=document.getElementById("productId").value
+const quantity=document.getElementById("quantity").value
+
+await fetch("/receipts",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({productId,quantity})
+})
+
+alert("Stock Added")
+
+}
