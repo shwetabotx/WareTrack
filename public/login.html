@@ -1,26 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Login</title>
-</head>
-
-<body>
-
 <h2>Login</h2>
 
-<input id="email" placeholder="Email">
-<br><br>
+<form action="/login" method="POST">
 
-<input id="password" type="password" placeholder="Password">
-<br><br>
+<input type="email" name="email" placeholder="Email" required><br><br>
 
-<button onclick="login()">Login</button>
+<input type="password" name="password" placeholder="Password" required><br><br>
 
-<h3>Signup</h3>
+<button type="submit">Login</button>
 
-<button onclick="signup()">Create Account</button>
+</form>
 
-<script src="script.js"></script>
+<br>
 
-</body>
-</html>
+<a href="signup.html">Signup</a>
+<br>
+<a href="forgot.html">Forgot Password</a>
