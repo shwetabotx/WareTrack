@@ -1,9 +1,57 @@
-<h2>Reset Password</h2>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Forgot Password</title>
+</head>
+
+<body>
+
+<h2>Forgot Password</h2>
+
+<!-- STEP 1: SEND OTP -->
 
 <form action="/send-otp" method="POST">
 
-<input type="email" name="email" placeholder="Enter Email"><br><br>
+<input type="email" name="email" placeholder="Enter your email" required>
 
 <button type="submit">Send OTP</button>
 
 </form>
+
+<hr>
+
+
+<!-- STEP 2: VERIFY OTP -->
+
+<h3>Enter OTP</h3>
+
+<form action="/verify-otp" method="POST">
+
+<input type="email" name="email" placeholder="Enter your email again" required>
+
+<input type="text" name="otp" placeholder="Enter OTP from email" required>
+
+<button type="submit">Verify OTP</button>
+
+</form>
+
+<hr>
+
+
+<!-- STEP 3: RESET PASSWORD -->
+
+<h3>Reset Password</h3>
+
+<form action="/reset-password" method="POST">
+
+<input type="email" name="email" placeholder="Enter your email again" required>
+
+<input type="password" name="password" placeholder="Enter new password" required>
+
+<button type="submit">Reset Password</button>
+
+</form>
+
+
+</body>
+</html>
