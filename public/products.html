@@ -1,3 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Create Product</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    background:white;
+    padding:30px;
+    width:350px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin-bottom:12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:14px;
+}
+
+input:focus{
+    outline:none;
+    border-color:#4CAF50;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    background:#4CAF50;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-size:15px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#43a047;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
 <h2>Create Product</h2>
 
 <form action="/products/create" method="POST">
@@ -15,3 +79,8 @@
 <button type="submit">Create Product</button>
 
 </form>
+
+</div>
+
+</body>
+</html>
