@@ -366,10 +366,38 @@ res.send("Stock adjusted");
 
 });
 
+app.post("/receipts/create", async (req,res)=>{
+
+const {product, qty} = req.body;
+
+const item = await Product.findOne({name:product});
+
+if(!item){
+return res.send("Product not found");
+}
+
+// Increase stock
+item.stock += Number(qty);
+
+await item.save();
+
+await Ledger.create({
+product,
+type:"receipt",
+quantity:Number(qty),
+location:"warehouse"
+});
+
+res.send("Stock received successfully");
+
+});
+
 
 // ======================
 // START SERVER
 // ======================
+
+
 
 app.listen(3000,()=>{
 console.log("Server running on http://localhost:3000");

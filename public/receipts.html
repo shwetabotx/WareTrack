@@ -1,11 +1,76 @@
-<h2>New Receipt</h2>
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Receive Stock</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.container{
+background:white;
+padding:30px;
+width:350px;
+border-radius:10px;
+box-shadow:0 4px 15px rgba(0,0,0,0.2);
+}
+
+h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#2ecc71;
+border:none;
+color:white;
+font-size:16px;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#27ae60;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Receive Stock</h2>
 
 <form action="/receipts/create" method="POST">
 
-<input name="product" placeholder="Product Name">
+<input name="product" placeholder="Product Name" required>
 
-<input name="qty" type="number" placeholder="Quantity">
+<input name="qty" type="number" placeholder="Quantity Received" required>
 
-<button>Receive Stock</button>
+<button type="submit">Receive Stock</button>
 
 </form>
+
+</div>
+
+</body>
+</html>
