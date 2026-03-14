@@ -1,106 +1,53 @@
-async function addProduct(){
+async function login(){
 
-const name=document.getElementById("name").value
-const sku=document.getElementById("sku").value
-const category=document.getElementById("category").value
-const stock=document.getElementById("stock").value
-const location=document.getElementById("location").value
+const email=document.getElementById("email").value
+const password=document.getElementById("password").value
 
-await fetch("/products",{
+const res=await fetch("/login",{
+
 method:"POST",
+
 headers:{
 "Content-Type":"application/json"
 },
-body:JSON.stringify({name,sku,category,stock,location})
+
+body:JSON.stringify({email,password})
+
 })
 
-loadProducts()
+const data=await res.json()
+
+if(data.success){
+
+window.location.href="dashboard.html"
+
+}else{
+
+alert("Invalid login")
 
 }
 
-async function loadProducts(){
-
-const res=await fetch("/products")
-const products=await res.json()
-
-const list=document.getElementById("productList")
-list.innerHTML=""
-
-products.forEach(p=>{
-const li=document.createElement("li")
-li.textContent=`${p.name} | Stock:${p.stock} | ${p.location}`
-list.appendChild(li)
-})
-
 }
 
-loadProducts()
+async function signup(){
 
-async function receiveStock(){
+const email=document.getElementById("email").value
+const password=document.getElementById("password").value
 
-const productId=document.getElementById("productId").value
-const quantity=document.getElementById("quantity").value
+const res=await fetch("/signup",{
 
-await fetch("/receipts",{
 method:"POST",
+
 headers:{
 "Content-Type":"application/json"
 },
-body:JSON.stringify({productId,quantity})
+
+body:JSON.stringify({email,password})
+
 })
 
-alert("Stock Added")
+const data=await res.json()
+
+alert(data.message)
 
 }
-
-async function deliver(){
-
-const productId=document.getElementById("dproductId").value
-const quantity=document.getElementById("dquantity").value
-
-await fetch("/deliveries",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({productId,quantity})
-})
-
-alert("Delivered")
-
-}
-
-async function transfer(){
-
-const productId=document.getElementById("tproductId").value
-const newLocation=document.getElementById("newLocation").value
-
-await fetch("/transfer",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({productId,newLocation})
-})
-
-alert("Location Updated")
-
-}
-
-async function adjust(){
-
-const productId=document.getElementById("aproductId").value
-const newStock=document.getElementById("newStock").value
-
-await fetch("/adjust",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({productId,newStock})
-})
-
-alert("Stock Adjusted")
-
-}
-

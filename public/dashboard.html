@@ -1,25 +1,16 @@
-<h1>Dashboard</h1>
+<!DOCTYPE html>
+<html>
 
-<div>Total Products: <span id="tp"></span></div>
-<div>Low Stock: <span id="ls"></span></div>
-<div>Receipts: <span id="rc"></span></div>
-<div>Deliveries: <span id="dl"></span></div>
+<head>
+<title>Dashboard</title>
+</head>
 
-<script>
+<body>
 
-async function loadDashboard(){
+<h1>Inventory Dashboard</h1>
 
-const res=await fetch("/dashboard")
+<p>Login successful</p>
 
-const data=await res.json()
+</body>
 
-document.getElementById("tp").textContent=data.totalProducts
-document.getElementById("ls").textContent=data.lowStock
-document.getElementById("rc").textContent=data.receipts
-document.getElementById("dl").textContent=data.deliveries
-
-}
-
-loadDashboard()
-
-</script>
+</html>

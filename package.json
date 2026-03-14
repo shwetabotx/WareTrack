@@ -2,24 +2,13 @@
   "name": "waretrack",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/shwetabotx/WareTrack.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/shwetabotx/WareTrack/issues"
-  },
-  "homepage": "https://github.com/shwetabotx/WareTrack#readme",
   "dependencies": {
-    "express": "^5.2.1",
+    "express": "^4.19.2",
     "mongoose": "^9.3.0",
     "nodemailer": "^8.0.2",
     "otp-generator": "^4.0.1"
