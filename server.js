@@ -208,7 +208,30 @@ res.send("Password reset successful");
 
 
 // CREATE PRODUCT
+app.post("/products/create", async (req,res)=>{
 
+const {name, sku, category, unit, stock} = req.body
+
+try{
+
+await Product.create({
+name,
+sku,
+category,
+unit,
+stock
+})
+
+res.redirect("/products.html")
+
+}catch(err){
+
+console.log(err)
+res.send("Error creating product")
+
+}
+
+});
 
 
 // GET PRODUCTS
