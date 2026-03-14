@@ -69,3 +69,38 @@ body:JSON.stringify({productId,quantity})
 alert("Delivered")
 
 }
+
+async function transfer(){
+
+const productId=document.getElementById("tproductId").value
+const newLocation=document.getElementById("newLocation").value
+
+await fetch("/transfer",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({productId,newLocation})
+})
+
+alert("Location Updated")
+
+}
+
+async function adjust(){
+
+const productId=document.getElementById("aproductId").value
+const newStock=document.getElementById("newStock").value
+
+await fetch("/adjust",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({productId,newStock})
+})
+
+alert("Stock Adjusted")
+
+}
+
