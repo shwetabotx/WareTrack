@@ -1,181 +1,154 @@
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <title>WareTrack Authentication</title>
-
-    <style>
-
-    body{
-    font-family: Arial;
-    background:#f2f2f2;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    }
+<!DOCTYPE html>
+<html>
+<head>
+<title>WareTrack Authentication</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#f2f2f2;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
 
-    .container{
-    background:white;
-    padding:30px;
-    width:320px;
-    border-radius:8px;
-    box-shadow:0 0 10px rgba(0,0,0,0.2);
-    }
+.container{
+background:white;
+padding:30px;
+width:320px;
+border-radius:8px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
 
-    h2{
-    text-align:center;
-    }
+h2{
+text-align:center;
+}
 
-    input{
-    width:100%;
-    padding:10px;
-    margin:8px 0;
-    border:1px solid #ccc;
-    border-radius:5px;
-    }
+input{
+width:100%;
+padding:10px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
 
-    button{
-    width:100%;
-    padding:10px;
-    background:#4CAF50;
-    color:white;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
-    }
+button{
+width:100%;
+padding:10px;
+background:#4CAF50;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
 
-    button:hover{
-    background:#45a049;
-    }
+button:hover{
+background:#45a049;
+}
 
-    .link{
-    text-align:center;
-    margin-top:10px;
-    cursor:pointer;
-    color:blue;
-    }
+.link{
+text-align:center;
+margin-top:10px;
+cursor:pointer;
+color:blue;
+}
 
-    .hidden{
-    display:none;
-    }
+.hidden{
+display:none;
+}
 
-    </style>
+</style>
 
-    <script>
+<script>
 
-    function showSignup(){
-    document.getElementById("login").classList.add("hidden");
-    document.getElementById("signup").classList.remove("hidden");
-    document.getElementById("forgot").classList.add("hidden");
-    }
+function showSignup(){
+document.getElementById("login").classList.add("hidden");
+document.getElementById("signup").classList.remove("hidden");
+document.getElementById("forgot").classList.add("hidden");
+}
 
-    function showLogin(){
-    document.getElementById("signup").classList.add("hidden");
-    document.getElementById("login").classList.remove("hidden");
-    document.getElementById("forgot").classList.add("hidden");
-    }
+function showLogin(){
+document.getElementById("signup").classList.add("hidden");
+document.getElementById("login").classList.remove("hidden");
+document.getElementById("forgot").classList.add("hidden");
+}
 
-    function showForgot(){
-    document.getElementById("login").classList.add("hidden");
-    document.getElementById("signup").classList.add("hidden");
-    document.getElementById("forgot").classList.remove("hidden");
-    }
+function showForgot(){
+document.getElementById("login").classList.add("hidden");
+document.getElementById("signup").classList.add("hidden");
+document.getElementById("forgot").classList.remove("hidden");
+}
 
-    </script>
+</script>
 
-    </head>
+</head>
 
-    <body>
+<body>
 
-    <div class="container">
+<div class="container">
 
-    <!-- LOGIN -->
+<!-- LOGIN -->
 
-    <div id="login">
+<div id="login">
 
-    <h2>Login</h2>
+<h2>Login</h2>
 
-    <form action="/login" method="POST">
+<form action="/login" method="POST">
 
-    <input type="email" name="email" placeholder="Email" required>
+<input type="email" name="email" placeholder="Email" required>
 
-    <input type="password" name="password" placeholder="Password" required>
+<input type="password" name="password" placeholder="Password" required>
 
-    <button type="submit">Login</button>
+<button type="submit">Login</button>
 
-    </form>
+</form>
 
-    <div class="link" onclick="showSignup()">Create account</div>
+<div class="link" onclick="showSignup()">Create account</div>
+<div class="link" onclick="showForgot()">Forgot password</div>
 
-    <div class="link" onclick="showForgot()">Forgot password</div>
+</div>
 
-    </div>
+<!-- SIGNUP -->
 
+<div id="signup" class="hidden">
 
-    <!-- SIGNUP -->
+<h2>Signup</h2>
 
-    <div id="signup" class="hidden">
+<form action="/signup" method="POST">
 
-    <h2>Signup</h2>
+<input type="email" name="email" placeholder="Email" required>
 
-    <form action="/signup" method="POST">
+<input type="password" name="password" placeholder="Password" required>
 
-    <input type="email" name="email" placeholder="Email" required>
+<button type="submit">Signup</button>
 
-    <input type="password" name="password" placeholder="Password" required>
+</form>
 
-    <button type="submit">Signup</button>
+<div class="link" onclick="showLogin()">Back to Login</div>
 
-    </form>
+</div>
 
-    <div class="link" onclick="showLogin()">Back to Login</div>
+<!-- FORGOT PASSWORD -->
 
-    </div>
+<div id="forgot" class="hidden">
 
+<h2>Forgot Password</h2>
 
-    <!-- FORGOT PASSWORD -->
+<form action="/send-otp" method="POST">
 
-    <div id="forgot" class="hidden">
+<input type="email" name="email" placeholder="Enter Email" required>
 
-    <h2>Reset Password</h2>
+<button type="submit">Send OTP</button>
 
-    <form action="/send-otp" method="POST">
+</form>
 
-    <input type="email" name="email" placeholder="Enter Email" required>
+<div class="link" onclick="showLogin()">Back to Login</div>
 
-    <button type="submit">Send OTP</button>
+</div>
 
-    </form>
+</div>
 
-    <hr>
-
-    <form action="/verify-otp" method="POST">
-
-    <input type="email" name="email" placeholder="Email">
-
-    <input type="text" name="otp" placeholder="Enter OTP">
-
-    <button type="submit">Verify OTP</button>
-
-    </form>
-
-    <hr>
-
-    <form action="/reset-password" method="POST">
-
-    <input type="email" name="email" placeholder="Email">
-
-    <input type="password" name="password" placeholder="New Password">
-
-    <button type="submit">Reset Password</button>
-
-    </form>
-
-    <div class="link" onclick="showLogin()">Back to Login</div>
-
-    </div>
-
-    </div>
-
-    </body>
-    </html>
+</body>
+</html>
