@@ -208,33 +208,7 @@ res.send("Password reset successful");
 
 
 // CREATE PRODUCT
-app.post("/products/create", async (req,res)=>{
 
-const {name,sku,category,unit,stock} = req.body;
-
-try{
-
-await Product.create({
-name,
-sku,
-category,
-unit,
-stock:Number(stock)
-});
-
-res.redirect("/products.html");
-
-}catch(err){
-
-if(err.code === 11000){
-return res.send("SKU already exists. Please use a different SKU.");
-}
-
-res.send("Error creating product");
-
-}
-
-});
 
 
 // GET PRODUCTS

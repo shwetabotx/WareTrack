@@ -8,9 +8,16 @@
 
 body{
 margin:0;
-font-family:Arial;
+font-family:Arial, Helvetica, sans-serif;
 background:#f4f6f9;
+}
+
+
+/* Layout */
+
+.container{
 display:flex;
+height:100vh;
 }
 
 /* Sidebar */
@@ -18,7 +25,6 @@ display:flex;
 .sidebar{
 width:220px;
 background:#2c3e50;
-height:100vh;
 color:white;
 padding-top:20px;
 }
@@ -33,26 +39,28 @@ display:block;
 padding:12px 20px;
 color:white;
 text-decoration:none;
-font-size:15px;
 }
 
 .sidebar a:hover{
 background:#34495e;
 }
 
-/* Main content */
+/* Main */
 
 .main{
 flex:1;
 padding:30px;
 }
 
+/* Header */
+
 .header{
 font-size:24px;
-margin-bottom:25px;
+font-weight:bold;
+margin-bottom:20px;
 }
 
-/* Dashboard cards */
+/* Cards */
 
 .cards{
 display:grid;
@@ -63,20 +71,19 @@ gap:20px;
 .card{
 background:white;
 padding:20px;
-border-radius:10px;
+border-radius:8px;
 box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
 
 .card h3{
 margin:0;
-font-size:16px;
-color:#777;
+color:#555;
 }
 
 .card p{
-font-size:24px;
-margin-top:10px;
+font-size:28px;
 font-weight:bold;
+margin-top:10px;
 }
 
 </style>
@@ -84,6 +91,8 @@ font-weight:bold;
 </head>
 
 <body>
+
+<div class="container">
 
 <!-- Sidebar -->
 
@@ -97,17 +106,15 @@ font-weight:bold;
 <a href="deliveries.html">Deliveries</a>
 <a href="transfers.html">Transfers</a>
 <a href="adjustments.html">Adjustments</a>
-<a href="ledger.html">Stock Ledger</a>
 
 </div>
 
-<!-- Main content -->
+
+<!-- Main Content -->
 
 <div class="main">
 
-<div class="header">
-Dashboard
-</div>
+<div class="header">Dashboard</div>
 
 <div class="cards">
 
@@ -130,6 +137,9 @@ Dashboard
 
 </div>
 
+</div>
+
+
 <script>
 
 fetch("/products")
@@ -142,10 +152,13 @@ let totalStock = 0
 let lowStock = 0
 
 data.forEach(p=>{
+
 totalStock += p.stock
+
 if(p.stock < 10){
 lowStock++
 }
+
 })
 
 document.getElementById("totalStock").innerText = totalStock
