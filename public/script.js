@@ -86,3 +86,21 @@ body:JSON.stringify({productId,newLocation})
 alert("Location Updated")
 
 }
+
+async function adjust(){
+
+const productId=document.getElementById("aproductId").value
+const newStock=document.getElementById("newStock").value
+
+await fetch("/adjust",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({productId,newStock})
+})
+
+alert("Stock Adjusted")
+
+}
+
