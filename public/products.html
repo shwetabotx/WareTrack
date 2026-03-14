@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
 
 <head>
 <title>Products - WareTrack</title>
@@ -11,7 +10,45 @@ body{
 font-family:Arial;
 background:#f4f6f9;
 margin:0;
+display:flex;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:220px;
+background:#2c3e50;
+color:white;
+height:100vh;
+position:fixed;
+left:0;
+top:0;
+}
+
+.sidebar h2{
+text-align:center;
+padding:20px 0;
+border-bottom:1px solid rgba(255,255,255,0.2);
+}
+
+.sidebar a{
+display:block;
+padding:12px 20px;
+color:white;
+text-decoration:none;
+}
+
+.sidebar a:hover{
+background:#34495e;
+color:white
+}
+
+/* MAIN CONTENT */
+
+.main{
+margin-left:220px;
 padding:30px;
+width:100%;
 }
 
 .container{
@@ -93,71 +130,33 @@ font-weight:bold;
 }
 
 </style>
-=======
-<head>
-<title>Create Product</title>
-
-<style>
-body{
-    font-family: Arial, sans-serif;
-    background:#f4f6f9;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-}
-
-.container{
-    background:white;
-    padding:30px;
-    width:350px;
-    border-radius:10px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
-}
-
-h2{
-    text-align:center;
-    margin-bottom:20px;
-}
-
-input{
-    width:100%;
-    padding:10px;
-    margin-bottom:12px;
-    border:1px solid #ccc;
-    border-radius:6px;
-    font-size:14px;
-}
-
-input:focus{
-    outline:none;
-    border-color:#4CAF50;
-}
-
-button{
-    width:100%;
-    padding:10px;
-    background:#4CAF50;
-    color:white;
-    border:none;
-    border-radius:6px;
-    font-size:15px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#43a047;
-}
-</style>
-
->>>>>>> 5fb7ccb2fdfaa00e562d798ceda359fae52aeeaf
 </head>
+
 
 <body>
 
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h2>WareTrack</h2>
+
+<a href="dashboard.html">Dashboard</a>
+<a href="products.html">Products</a>
+<a href="receipts.html">Receipts</a>
+<a href="deliveries.html">Deliveries</a>
+<a href="transfers.html">Transfers</a>
+<a href="adjustments.html">Adjustments</a>
+
+</div>
+
+
+<!-- MAIN CONTENT -->
+
+<div class="main">
+
 <div class="container">
 
-<<<<<<< HEAD
 <!-- Create Product -->
 
 <div class="card">
@@ -167,13 +166,9 @@ button:hover{
 <form action="/products/create" method="POST">
 
 <input name="name" placeholder="Product Name" required>
-
 <input name="sku" placeholder="SKU Code">
-
 <input name="category" placeholder="Category">
-
 <input name="unit" placeholder="Unit (kg, pcs, box)">
-
 <input name="stock" type="number" placeholder="Initial Stock">
 
 <button>Create Product</button>
@@ -182,7 +177,6 @@ button:hover{
 
 </div>
 
-<<<<<<< HEAD
 
 <!-- Product List -->
 
@@ -210,6 +204,8 @@ button:hover{
 
 </div>
 
+</div>
+
 
 <script>
 
@@ -218,7 +214,6 @@ fetch("/products")
 .then(data=>{
 
 const table = document.getElementById("products")
-
 table.innerHTML=""
 
 data.forEach(p=>{
@@ -242,4 +237,5 @@ table.innerHTML += `
 </script>
 
 </body>
+
 </html>
