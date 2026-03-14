@@ -1,8 +1,11 @@
-<h2>Receive Stock</h2>
+<h2>New Receipt</h2>
 
-<input id="productId" placeholder="Product ID">
-<input id="quantity" placeholder="Quantity">
+<form action="/receipts/create" method="POST">
 
-<button onclick="receiveStock()">Receive</button>
+<input name="product" placeholder="Product Name">
 
-<script src="script.js"></script>
+<input name="qty" type="number" placeholder="Quantity">
+
+<button>Receive Stock</button>
+
+</form>

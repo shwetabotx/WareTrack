@@ -1,8 +1,11 @@
-<h2>Deliver Product</h2>
+<h2>Delivery Order</h2>
 
-<input id="dproductId" placeholder="Product ID">
-<input id="dquantity" placeholder="Quantity">
+<form action="/deliveries/create" method="POST">
 
-<button onclick="deliver()">Deliver</button>
+<input name="product" placeholder="Product">
 
-<script src="script.js"></script>
+<input name="qty" type="number" placeholder="Quantity">
+
+<button>Deliver</button>
+
+</form>

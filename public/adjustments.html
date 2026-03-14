@@ -1,8 +1,11 @@
-<h2>Adjust Stock</h2>
+<h2>Stock Adjustment</h2>
 
-<input id="aproductId" placeholder="Product ID">
-<input id="newStock" placeholder="New Stock">
+<form action="/adjust" method="POST">
 
-<button onclick="adjust()">Adjust</button>
+<input name="product" placeholder="Product">
 
-<script src="script.js"></script>
+<input name="counted" type="number" placeholder="Actual Count">
+
+<button>Adjust</button>
+
+</form>

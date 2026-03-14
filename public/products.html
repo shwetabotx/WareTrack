@@ -1,15 +1,17 @@
-<h2>Add Product</h2>
+<h2>Create Product</h2>
 
-<input id="name" placeholder="Product Name">
-<input id="sku" placeholder="SKU">
-<input id="category" placeholder="Category">
-<input id="stock" placeholder="Initial Stock">
-<input id="location" placeholder="Location">
+<form action="/products/create" method="POST">
 
-<button onclick="addProduct()">Add</button>
+<input name="name" placeholder="Product Name" required>
 
-<h2>Product List</h2>
+<input name="sku" placeholder="SKU Code" required>
 
-<ul id="productList"></ul>
+<input name="category" placeholder="Category">
 
-<script src="script.js"></script>
+<input name="unit" placeholder="Unit (kg, pcs)">
+
+<input type="number" name="stock" placeholder="Initial Stock">
+
+<button type="submit">Create Product</button>
+
+</form>
