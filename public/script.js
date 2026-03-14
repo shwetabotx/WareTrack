@@ -52,3 +52,20 @@ body:JSON.stringify({productId,quantity})
 alert("Stock Added")
 
 }
+
+async function deliver(){
+
+const productId=document.getElementById("dproductId").value
+const quantity=document.getElementById("dquantity").value
+
+await fetch("/deliveries",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({productId,quantity})
+})
+
+alert("Delivered")
+
+}
