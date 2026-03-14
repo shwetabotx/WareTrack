@@ -10,13 +10,24 @@
 
 <form action="/reset-password" method="POST">
 
-<input type="email" name="email" placeholder="Enter your email" required>
+<input type="email" id="email" name="email" placeholder="Email" required>
+
+<input type="text" id="otp" name="otp" placeholder="OTP" required>
 
 <input type="password" name="password" placeholder="New Password" required>
 
 <button type="submit">Reset Password</button>
 
 </form>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+document.getElementById("email").value = params.get("email");
+document.getElementById("otp").value = params.get("otp");
+
+</script>
 
 </body>
 </html>

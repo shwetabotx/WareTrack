@@ -74,70 +74,65 @@ res.redirect("/dashboard.html");
 
 
 // Send OTP
-app.post("/send-otp",async(req,res)=>{
+// SEND OTP
+app.post("/send-otp", async (req,res)=>{
 
-const {email}=req.body;
+const {email} = req.body;
 
-const user=await User.findOne({email});
+const user = await User.findOne({email});
 
 if(!user){
 return res.send("User not found");
 }
 
-const otp=otpGenerator.generate(6,{
+const otp = otpGenerator.generate(6,{
 digits:true,
 alphabets:false,
 upperCase:false,
 specialChars:false
 });
 
-user.otp=otp;
+user.otp = otp;
 await user.save();
 
-console.log("OTP:",otp);
+const resetLink = `http://localhost:3000/reset.html?email=${email}&otp=${otp}`;
 
 await transporter.sendMail({
 from:"YOUR_EMAIL@gmail.com",
 to:email,
-subject:"Password Reset OTP",
-text:`Your OTP is ${otp}`
+subject:"Reset Your Password",
+html:`
+<h3>Password Reset Request</h3>
+<p>Click the link below to reset your password:</p>
+<a href="${resetLink}">Reset Password</a>
+<p>Or use this OTP: <b>${otp}</b></p>
+`
 });
 
-res.redirect("/otp.html");
-
-});
-
-
-// Verify OTP
-app.post("/verify-otp",async(req,res)=>{
-
-const {email,otp}=req.body;
-
-const user=await User.findOne({email,otp});
-
-if(!user){
-return res.send("Invalid OTP");
-}
-
-res.redirect("/reset.html");
+res.send("Password reset link sent to your email");
 
 });
 
 
 // Reset password
-app.post("/reset-password",async(req,res)=>{
+app.post("/reset-password", async (req,res)=>{
 
-const {email,password}=req.body;
+const {email,otp,password} = req.body;
 
-await User.updateOne(
-{email},
-{password,otp:""}
-);
+const user = await User.findOne({email,otp});
 
-res.send("Password reset successful");
+if(!user){
+return res.send("Invalid reset link");
+}
+
+user.password = password;
+user.otp = "";
+
+await user.save();
+
+res.send("Password reset successful. You can login now.");
 
 });
-
 
 app.listen(3000,()=>{
 console.log("Server running on http://localhost:3000");
