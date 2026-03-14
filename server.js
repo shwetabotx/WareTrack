@@ -119,10 +119,14 @@ app.post("/reset-password", async (req,res)=>{
 
 const {email,otp,password} = req.body;
 
-const user = await User.findOne({email,otp});
+const user = await User.findOne({ email });
 
 if(!user){
-return res.send("Invalid reset link");
+return res.send("User not found");
+}
+
+if(user.otp !== otp){
+return res.send("Invalid reset link or OTP");
 }
 
 user.password = password;
@@ -130,9 +134,11 @@ user.otp = "";
 
 await user.save();
 
-res.send("Password reset successful. You can login now.");
+res.send("Password reset successful. Go back and login.");
 
 });
+
+// Start server
 
 app.listen(3000,()=>{
 console.log("Server running on http://localhost:3000");

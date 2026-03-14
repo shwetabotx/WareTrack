@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Reset Password</title>
-</head>
-
-<body>
-
-<h2>Reset Password</h2>
-
 <form action="/reset-password" method="POST">
 
-<input type="email" id="email" name="email" placeholder="Email" required>
+<input type="email" id="email" name="email" required>
 
-<input type="text" id="otp" name="otp" placeholder="OTP" required>
+<input type="text" id="otp" name="otp" required>
 
 <input type="password" name="password" placeholder="New Password" required>
 
@@ -21,13 +11,8 @@
 </form>
 
 <script>
-
 const params = new URLSearchParams(window.location.search);
 
 document.getElementById("email").value = params.get("email");
 document.getElementById("otp").value = params.get("otp");
-
 </script>
-
-</body>
-</html>

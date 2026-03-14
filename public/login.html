@@ -1,58 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>WareTrack Authentication</title>
+<title>WareTrack</title>
 
 <style>
 
 body{
-font-family: Arial;
-background:#f2f2f2;
+font-family: Arial, sans-serif;
+background: linear-gradient(135deg,#4CAF50,#2e7d32);
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
+margin:0;
 }
 
 .container{
 background:white;
-padding:30px;
-width:320px;
-border-radius:8px;
-box-shadow:0 0 10px rgba(0,0,0,0.2);
+padding:35px;
+width:340px;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
 h2{
 text-align:center;
+margin-bottom:20px;
+color:#333;
 }
 
 input{
 width:100%;
-padding:10px;
+padding:12px;
 margin:8px 0;
 border:1px solid #ccc;
-border-radius:5px;
+border-radius:6px;
+font-size:14px;
 }
 
 button{
 width:100%;
-padding:10px;
+padding:12px;
+margin-top:10px;
 background:#4CAF50;
 color:white;
 border:none;
-border-radius:5px;
+border-radius:6px;
+font-size:15px;
 cursor:pointer;
 }
 
 button:hover{
-background:#45a049;
+background:#388e3c;
 }
 
 .link{
 text-align:center;
-margin-top:10px;
+margin-top:12px;
+color:#1976d2;
 cursor:pointer;
-color:blue;
+font-size:14px;
 }
 
 .hidden{
@@ -64,21 +71,21 @@ display:none;
 <script>
 
 function showSignup(){
-document.getElementById("login").classList.add("hidden");
-document.getElementById("signup").classList.remove("hidden");
-document.getElementById("forgot").classList.add("hidden");
+login.classList.add("hidden")
+signup.classList.remove("hidden")
+forgot.classList.add("hidden")
 }
 
 function showLogin(){
-document.getElementById("signup").classList.add("hidden");
-document.getElementById("login").classList.remove("hidden");
-document.getElementById("forgot").classList.add("hidden");
+signup.classList.add("hidden")
+login.classList.remove("hidden")
+forgot.classList.add("hidden")
 }
 
 function showForgot(){
-document.getElementById("login").classList.add("hidden");
-document.getElementById("signup").classList.add("hidden");
-document.getElementById("forgot").classList.remove("hidden");
+login.classList.add("hidden")
+signup.classList.add("hidden")
+forgot.classList.remove("hidden")
 }
 
 </script>
@@ -93,7 +100,7 @@ document.getElementById("forgot").classList.remove("hidden");
 
 <div id="login">
 
-<h2>Login</h2>
+<h2>WareTrack Login</h2>
 
 <form action="/login" method="POST">
 
@@ -110,11 +117,12 @@ document.getElementById("forgot").classList.remove("hidden");
 
 </div>
 
+
 <!-- SIGNUP -->
 
 <div id="signup" class="hidden">
 
-<h2>Signup</h2>
+<h2>Create Account</h2>
 
 <form action="/signup" method="POST">
 
@@ -130,7 +138,8 @@ document.getElementById("forgot").classList.remove("hidden");
 
 </div>
 
-<!-- FORGOT PASSWORD -->
+
+<!-- FORGOT -->
 
 <div id="forgot" class="hidden">
 
