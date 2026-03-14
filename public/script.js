@@ -69,3 +69,20 @@ body:JSON.stringify({productId,quantity})
 alert("Delivered")
 
 }
+
+async function transfer(){
+
+const productId=document.getElementById("tproductId").value
+const newLocation=document.getElementById("newLocation").value
+
+await fetch("/transfer",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({productId,newLocation})
+})
+
+alert("Location Updated")
+
+}
