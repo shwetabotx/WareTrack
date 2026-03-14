@@ -3,15 +3,53 @@
 <form action="/products/create" method="POST">
 
 <input name="name" placeholder="Product Name" required>
-
-<input name="sku" placeholder="SKU Code" required>
-
+<input name="sku" placeholder="SKU">
 <input name="category" placeholder="Category">
+<input name="unit" placeholder="Unit">
+<input name="stock" type="number" placeholder="Initial Stock">
 
-<input name="unit" placeholder="Unit (kg, pcs)">
-
-<input type="number" name="stock" placeholder="Initial Stock">
-
-<button type="submit">Create Product</button>
+<button>Create Product</button>
 
 </form>
+
+<h2>Product List</h2>
+
+<table border="1">
+
+<tr>
+<th>Name</th>
+<th>SKU</th>
+<th>Category</th>
+<th>Unit</th>
+<th>Stock</th>
+</tr>
+
+<tbody id="products"></tbody>
+
+</table>
+
+<script>
+
+fetch("/products")
+.then(res=>res.json())
+.then(data=>{
+
+const table = document.getElementById("products")
+
+data.forEach(p=>{
+
+table.innerHTML += `
+<tr>
+<td>${p.name}</td>
+<td>${p.sku}</td>
+<td>${p.category}</td>
+<td>${p.unit}</td>
+<td>${p.stock}</td>
+</tr>
+`
+
+})
+
+})
+
+</script>

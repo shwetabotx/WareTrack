@@ -12,18 +12,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 
-// ======================
+
 // MongoDB Connection
-// ======================
+
 
 mongoose.connect("mongodb+srv://shwetabot:Shweta999@cluster0.buahg9p.mongodb.net/?appName=Cluster0")
 .then(()=>console.log("MongoDB Connected"))
 .catch(err=>console.log(err));
 
 
-// ======================
 // USER MODEL
-// ======================
+
 
 const userSchema = new mongoose.Schema({
 email:String,
@@ -34,9 +33,8 @@ otp:String
 const User = mongoose.model("User", userSchema);
 
 
-// ======================
 // PRODUCT MODEL
-// ======================
+
 
 const productSchema = new mongoose.Schema({
 
@@ -54,10 +52,8 @@ default:0
 
 const Product = mongoose.model("Product", productSchema);
 
-
-// ======================
 // LEDGER MODEL
-// ======================
+
 
 const ledgerSchema = new mongoose.Schema({
 
@@ -76,9 +72,8 @@ default:Date.now
 const Ledger = mongoose.model("Ledger", ledgerSchema);
 
 
-// ======================
 // EMAIL TRANSPORTER
-// ======================
+
 
 const transporter = nodemailer.createTransport({
 
@@ -92,18 +87,16 @@ pass:"wkji jmsk ttmr vltv"
 });
 
 
-// ======================
 // HOME
-// ======================
+
 
 app.get("/", (req,res)=>{
 res.sendFile(path.join(__dirname,"public","login.html"));
 });
 
 
-// ======================
 // SIGNUP
-// ======================
+
 
 app.post("/signup", async (req,res)=>{
 
@@ -121,9 +114,8 @@ res.send("Signup successful");
 });
 
 
-// ======================
 // LOGIN
-// ======================
+
 
 app.post("/login", async (req,res)=>{
 
@@ -140,9 +132,9 @@ res.redirect("/dashboard.html");
 });
 
 
-// ======================
+
 // SEND OTP
-// ======================
+
 
 app.post("/send-otp", async (req,res)=>{
 
@@ -187,9 +179,9 @@ res.send("Password reset link sent to your email");
 });
 
 
-// ======================
+
 // RESET PASSWORD
-// ======================
+
 
 app.post("/reset-password", async (req,res)=>{
 
@@ -215,10 +207,7 @@ res.send("Password reset successful");
 });
 
 
-// ======================
 // CREATE PRODUCT
-// ======================
-
 app.post("/products/create", async (req,res)=>{
 
 const {name,sku,category,unit,stock} = req.body;
@@ -226,29 +215,20 @@ const {name,sku,category,unit,stock} = req.body;
 try{
 
 await Product.create({
-
 name,
 sku,
 category,
 unit,
 stock:Number(stock)
-
 });
 
-await Ledger.create({
-
-product:name,
-type:"initial stock",
-quantity:Number(stock),
-location:"warehouse"
-
-});
-
-res.send("Product created successfully");
+res.redirect("/products.html");
 
 }catch(err){
 
-console.log(err);
+if(err.code === 11000){
+return res.send("SKU already exists. Please use a different SKU.");
+}
 
 res.send("Error creating product");
 
@@ -257,17 +237,24 @@ res.send("Error creating product");
 });
 
 
-// ======================
-// RECEIPT (INCOMING)
-// ======================
+// GET PRODUCTS
+app.get("/products", async(req,res)=>{
 
-app.post("/receipts/create", async (req,res)=>{
+const products = await Product.find();
+
+res.json(products);
+
+});
+
+
+// RECEIPTS
+app.post("/receipts/create", async(req,res)=>{
 
 const {product,qty} = req.body;
 
 await Product.updateOne(
-{ name:product },
-{ $inc:{ stock:Number(qty) } }
+{name:product},
+{$inc:{stock:Number(qty)}}
 );
 
 await Ledger.create({
@@ -284,17 +271,14 @@ res.send("Receipt completed");
 });
 
 
-// ======================
-// DELIVERY (OUTGOING)
-// ======================
-
-app.post("/deliveries/create", async (req,res)=>{
+// DELIVERIES
+app.post("/deliveries/create", async(req,res)=>{
 
 const {product,qty} = req.body;
 
 await Product.updateOne(
-{ name:product },
-{ $inc:{ stock:-Number(qty) } }
+{name:product},
+{$inc:{stock:-Number(qty)}}
 );
 
 await Ledger.create({
@@ -311,13 +295,10 @@ res.send("Delivery completed");
 });
 
 
-// ======================
-// INTERNAL TRANSFER
-// ======================
+// TRANSFER
+app.post("/transfer", async(req,res)=>{
 
-app.post("/transfer", async (req,res)=>{
-
-const {product,from,to,qty} = req.body;
+const {product,from,to} = req.body;
 
 await Ledger.create({
 
@@ -333,19 +314,12 @@ res.send("Transfer logged");
 });
 
 
-// ======================
-// STOCK ADJUSTMENT
-// ======================
-
-app.post("/adjust", async (req,res)=>{
+// ADJUSTMENT
+app.post("/adjust", async(req,res)=>{
 
 const {product,counted} = req.body;
 
 const item = await Product.findOne({name:product});
-
-if(!item){
-return res.send("Product not found");
-}
 
 const diff = Number(counted) - item.stock;
 
@@ -367,10 +341,17 @@ res.send("Stock adjusted");
 });
 
 
-// ======================
-// START SERVER
-// ======================
+// LEDGER
+app.get("/ledger", async(req,res)=>{
 
+const logs = await Ledger.find().sort({date:-1});
+
+res.json(logs);
+
+});
+
+
+// START SERVER
 app.listen(3000,()=>{
 console.log("Server running on http://localhost:3000");
 });
